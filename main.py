@@ -9,6 +9,8 @@ def read_file(file_path):
     except FileNotFoundError:  #Check that the file exists
         print(f"File not found:{file_path}")
         return ""
+    if not essay1.strip() or not essay2.strip():
+        print("Cannot proceed...one or both essay files are empty!")
 
 """Converts text to lowercase, removes punctuation and spilts essay into words"""
 def preprocess(text):
@@ -86,11 +88,20 @@ print("Processed Essay 2 Words:", essay2_words[:10])"""
 
 #Find and print common words
 common_words = find_common_words(essay1_words, essay2_words)
-print(f"Common words ({len(common_words)} found):", common_words)
+#print(f"Common words ({len(common_words)} found):", common_words)
+
+#List how many times the common word appears in each essay:print("\nFrequency of common words:")
+#for word in common_words:
+ #   print(f"'{word}': Essay 1 = {essay1_words.count(word)} | Essay 2 = {essay2_words.count(word)}")
 
 #Calculate the plagiarism percentage
 plagiarism_percent = calculate_percentage_plagiarism(essay1_words, essay2_words)
 print(f"Plagiarism detected: {plagiarism_percent}%")
+if plagiarism_percent >= 50:
+    print("Plagiarism Detected!")
+else:
+    print("No Plagiarism Detected.")
+
 
 #Ask user to search for a specific word
 word_to_search = input("\n Enter a word to search for in  both essays:").lower()
